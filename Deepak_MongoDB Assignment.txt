@@ -1,0 +1,65 @@
+use Library_DB;
+
+db.createCollection("books");
+                       
+db.books.insertMany([{title:"java",author:"rakesh",genre:"fiction",price:500,availablecopies:5},{title:"Db",author:"Abc",genre:"fiction",price:200,availablecopies:8},{title:"php",author:"nimmesh",genre:"fiction",price:600,availablecopies:2},{title:"js",author:"sunit",genre:"fiction",price:100,availablecopiies:4},{title:"Ts",author:"harshal",genre:"fiction",price:700,availablecopies:7}]);
+
+db.books.find();
+
+db.books.find({price:{$gt:300,$lt:800}});
+                                      
+db.books.updateMany({title:"php"},{$set:{price:100}});
+
+db.books.updateMany({availablecopies:{$gt:5}},{$inc:{availablecopies:2}});
+
+db.books.deleteOne({title:"php"});
+
+db.books.deleteOne({availablecopies:5});
+-------------------------------------------------------------------------------------------
+use Hospital_DB;
+
+db.createCollection("pateints");
+
+db.pateints.insertMany([{name:"Rakesh",age:21,disease:"abc",doctorasigned:"def",city:"Mumbai"},{name:"Nimesh",age:20,disease:"mno",doctorasigned:"klm",city:"gujarat"},{name:"harshal",age:30,disease:"dgh",doctorasigned:"jki",city:"palghar"}]);
+
+db.pateints.find();
+
+db.pateints.find({age:{$gt:20,$lt:50}});
+
+db.pateints.find({disease:"mno"});
+
+db.patients.updateOne( { name: "Nimesh" },{$set: {age:20}})
+
+db.pateints.updateOne({name:"Rakesh"},{$set:{doctorasigned:"kkk"}});
+                                     ^
+db.pateints.updateMany({age:{$gt:21}},{$inc:{age:2}});
+
+db.pateints.deleteOne({name:"Rakesh"});
+
+db.pateints.deleteMany({city:"mumbai"});
+
+db.pateints.findOne({title:"harshal"});
+
+db.pateints.findOne({title:"Nimesh"});
+
+db.pateints.find({ },{name:1},{_id:0});
+
+db.pateints.find().sort({age:1});
+
+db.pateints.find().sort({age:-1});
+
+db.pateints.find().limit(2);
+
+db.pateints.find().skip(1);
+
+db.pateints.find({age:{$gt:20}});
+
+---------------------------------------------------------------------------
+use Library_DB;
+
+db.books.find({price:{$lt:500}});
+
+db.books.find({$and:[{genre:"fiction",price:{$gt:200}}]});
+
+db.books.find({$or:[{genre:"fiction",price:{$gt:200}}]});
+
